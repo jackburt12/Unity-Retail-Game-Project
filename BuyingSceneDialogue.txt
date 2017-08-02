@@ -1,0 +1,6 @@
+[Seller] ;So, what do you think?
+[Player] ;Well, it's a bit of a shithole isn't it.
+[Seller] ;It could do with a bit of love, sure, but once you're settled I know you're gonna love it.
+[Player] ;A <i>bit</i> of love?
+[Seller] ;Err... well, not my problem now buddy, enjoy!
+[Player] ;*sigh*

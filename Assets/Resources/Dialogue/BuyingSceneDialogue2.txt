@@ -1,0 +1,9 @@
+Seller ;So what do you think?
+Player ;It's a bit...
+Seller ;...A bit what?
+Player ;Bland?
+Seller ;Hey, I didn't say I was selling you the next Tezcos, alright?
+PLayer ;I guess it'll have to do.
+Seller ;It's a good deal, I promise you.
+Player ;Evs.
+Seller ;aaaaaaaaaaaaaaaaa 
