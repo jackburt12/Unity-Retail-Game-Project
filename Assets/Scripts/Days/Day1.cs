@@ -37,8 +37,9 @@ public class Day1 : MonoBehaviour {
 
 		wall = GameObject.Find ("BackWall");
 
-		wallList.Add(Resources.Load<Sprite>("Walls/YellowWall"));
-
+		wallList.Add(Resources.Load<Sprite>("Walls/YellowPlain"));
+		wallList.Add (Resources.Load<Sprite> ("Walls/WhitePlain"));
+		wallList.Add (Resources.Load<Sprite> ("Walls/BrickWall"));
 
 		StartCoroutine ("Sequence");
 
@@ -135,10 +136,10 @@ public class Day1 : MonoBehaviour {
 
 		}
 
-		audio = welcomePanel.GetComponentInChildren<AudioSource> ();
+		audio = GameObject.Find("DayChanger").GetComponent<AudioSource> ();
 
 
-		yield return StartCoroutine(TextScroll ((Resources.Load("Dialogue/WelcomeDialogue") as TextAsset).text, welcomePanel.GetComponentInChildren<Text> ()));
+		welcomePanel.GetComponentInChildren<Text>().text = (Resources.Load("Dialogue/WelcomeDialogue") as TextAsset).text;
 
 		welcomePanel.GetComponentInChildren<Button> ().onClick.AddListener (CloseWelcomePanel);
 
@@ -165,14 +166,14 @@ public class Day1 : MonoBehaviour {
 
 		floorButtons = (GameObject)Instantiate(Resources.Load("Prefabs/UI/FloorChangeButtons"), GameObject.Find("Canvas").transform);
 
-			floorButtons.transform.Find("ConfirmButton").GetComponent<Button>().onClick.AddListener (CloseFloor);
-			floorButtons.transform.Find("ChangerButtonLeft").GetComponent<Button>().onClick.AddListener (FloorChangerLeft);
+		floorButtons.transform.Find("ConfirmButton").GetComponent<Button>().onClick.AddListener (CloseFloor);
+		floorButtons.transform.Find("ChangerButtonLeft").GetComponent<Button>().onClick.AddListener (FloorChangerLeft);
 		floorButtons.transform.Find ("ChangerButtonRight").GetComponent<Button> ().onClick.AddListener (FloorChangerRight);
 
 		while (!floorClicked) {
 			yield return null;
 		}
-
+		currentPosition = 0;
 		yield return null;
 	}
 
@@ -190,52 +191,17 @@ public class Day1 : MonoBehaviour {
 
 	}
 
-	IEnumerator TextScroll(string lineOfText, Text textArea) {
-		textArea.color = new Color(1,1,1,0);
-		textArea.text = lineOfText;
-
-		int size;
-
-		int letter = 0;
-
-		yield return new WaitForEndOfFrame ();
-
-		size = textArea.cachedTextGenerator.fontSizeUsedForBestFit;
-
-		textArea.text = "";
-
-		textArea.color = new Color(1,1,1,1);
-		bool isTyping = true;
-		bool cancelTyping = false;
-
-		textArea.resizeTextForBestFit = false;
-		textArea.fontSize = size;
-
-
-		while (isTyping && !cancelTyping && (letter < (lineOfText.Length - 1))) {
-
-			textArea.text += lineOfText [letter];
-
-
-			audio.PlayOneShot (letterSound);
-
-			letter += 1;
-			yield return new WaitForSeconds(typeSpeed);
-		}
-
-		textArea.text = lineOfText;
-		isTyping = false;
-		cancelTyping = false;
-
-	
-		yield return null;
-	}
-
 	IEnumerator ChooseWall() {
+
+		Vector3 camPos = GameObject.Find ("Main Camera").transform.position;
+
+		while (GameObject.Find ("Main Camera").transform.position.y < 5) {
+			GameObject.Find ("Main Camera").transform.Translate(Vector2.up * 0.02f);
+		}
 
 		wallButtons = (GameObject)Instantiate(Resources.Load("Prefabs/UI/FloorChangeButtons"), GameObject.Find("Canvas").transform);
 
-		wallButtons.transform.Find ("ConfirmButton").GetComponent<Text> ().text = "£750";
+		wallButtons.transform.Find ("ConfirmButton").GetComponentInChildren<Text> ().text = "£750";
 		wallButtons.transform.Find ("ChooseFloorText").GetComponent<Text> ().text = "Choose Wall";
 
 		wallButtons.transform.Find("ConfirmButton").GetComponent<Button>().onClick.AddListener (CloseWall);
@@ -243,8 +209,14 @@ public class Day1 : MonoBehaviour {
 		wallButtons.transform.Find ("ChangerButtonRight").GetComponent<Button> ().onClick.AddListener (WallChangerRight);
 
 		while (!wallClicked) {
+
 			yield return null;
 		}
+
+		while (GameObject.Find ("Main Camera").transform.position.y > camPos.y) {
+			GameObject.Find ("Main Camera").transform.Translate(Vector2.down * 0.02f);
+		}
+
 
 		yield return null;
 

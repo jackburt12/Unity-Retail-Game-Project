@@ -47,7 +47,6 @@ public class DayChanger : MonoBehaviour {
 
 				dayStarted = true;
 				break;
-
 			}
 		}
 	}

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Items>
+	<Item>
+		<ItemID>101</ItemID>
+		<ImageName>drinksmachine</ImageName>
+		<ItemName>Drinks Machine</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>100</ItemCost>
+		<ItemRevenue>0.02</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>102</ItemID>
+		<ImageName>fruitandveg</ImageName>
+		<ItemName>Fruit and Veg Stand</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>60</ItemCost>
+		<ItemRevenue>0.015</ItemRevenue>
+	</Item>
+</Items>

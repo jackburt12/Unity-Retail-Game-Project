@@ -6,7 +6,7 @@ public class Prologue : MonoBehaviour {
 
 	private float speed = 0.04f;
 
-	private bool active = false;
+//	private bool active = false;
 	GameTime gameTime;
 
 	private GameObject floor, wall;
@@ -31,7 +31,7 @@ public class Prologue : MonoBehaviour {
 		anim = player.GetComponent<Animator> ();
 
 
-		active = true;
+	//	active = true;
 
 		player.GetComponent<PlayerMovement> ().canMove = false;
 		player.GetComponent<PlayerAnimation> ().canMove = false;
