@@ -11,7 +11,7 @@ public class Item {
 		MISCELLANEOUS 
 	}
 
-	private Sprite image;
+	private string image;
 	private string name;
 	private int id;
 	private int cost;
@@ -20,14 +20,14 @@ public class Item {
 
 
 
-	public Item (Sprite image, ItemTypes type, string name, int id) {
+	public Item (string image, ItemTypes type, string name, int id) {
 		this.image = image;
 		this.type = type;
 		this.name = name;
 		this.id = id;	
 	}
 
-	public Item(Sprite image, ItemTypes type, string name, int id, int cost, double revenue) {
+	public Item(string image, ItemTypes type, string name, int id, int cost, double revenue) {
 		this.image = image;
 		this.type = type;
 		this.name = name;
@@ -67,7 +67,7 @@ public class Item {
 		}
 	}
 
-	public Sprite Image {
+	public string Image {
 		get {
 			return this.image;
 		}

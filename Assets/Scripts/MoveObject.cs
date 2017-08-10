@@ -3,12 +3,13 @@ using System.Collections;
 
 public class MoveObject : MonoBehaviour {
 
-	private bool clicked = false;
+	public bool clicked = false;
 	private bool hoverOver = false;
 	private Animator anim;
 	private bool flag = false;
 	private GameObject gridObj;
 	private bool collid = false;
+
 
 	// Use this for initialization
 	void Start () {
@@ -42,7 +43,17 @@ public class MoveObject : MonoBehaviour {
 		}
 
 		if (clicked == true) {
-
+			if (transform.position.x > 7.5f) {
+				collid = true;
+			} else if (transform.position.x < -7.5f) {
+				collid = true;
+			} else if (transform.position.y > 4f) {
+				collid = true;
+			} else if (transform.position.y < -4f) {
+				collid = true;
+			} else {
+				collid = false;
+			}
 			hoverOver = false;
 
 			GetComponent<Renderer> ().sortingOrder = 1000;
@@ -80,8 +91,6 @@ public class MoveObject : MonoBehaviour {
 
 
 		flag = true;
-
-
 	}
 
 	public void OnMouseOver () {

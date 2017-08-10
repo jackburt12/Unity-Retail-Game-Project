@@ -16,4 +16,85 @@
 		<ItemCost>60</ItemCost>
 		<ItemRevenue>0.015</ItemRevenue>
 	</Item>
+	<Item>
+		<ItemID>103</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Milk and Dairy</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>80</ItemCost>
+		<ItemRevenue>0.018</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>104</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Eggs</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>50</ItemCost>
+		<ItemRevenue>0.012</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>105</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Frozen Food</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>110</ItemCost>
+		<ItemRevenue>0.024</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>106</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Alcholic Drinks</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>200</ItemCost>
+		<ItemRevenue>0.032</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>107</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Cosmetics And Toiletries</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>180</ItemCost>
+		<ItemRevenue>0.028</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>108</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Toys</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>150</ItemCost>
+		<ItemRevenue>0.024</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>109</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Junk Food</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>180</ItemCost>
+		<ItemRevenue>0.03</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>110</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Bakery</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>1200</ItemCost>
+		<ItemRevenue>0.18</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>111</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Electronics</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>600</ItemCost>
+		<ItemRevenue>0.085</ItemRevenue>
+	</Item>
+	<Item>
+		<ItemID>112</ItemID>
+		<ImageName></ImageName>
+		<ItemName>Meat and Fish Counter</ItemName>
+		<ItemType>FUNCTIONAL</ItemType>
+		<ItemCost>500</ItemCost>
+		<ItemRevenue>0.06</ItemRevenue>
+	</Item>
 </Items>
+

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MoveObjectEven : MonoBehaviour {
 
-	private bool clicked = false;
+	public bool clicked = false;
 	private bool hoverOver = false;
 	private Animator anim;
 	private bool flag = false;
@@ -23,7 +23,6 @@ public class MoveObjectEven : MonoBehaviour {
 
 		if (clicked == true && Input.GetKeyDown (KeyCode.Mouse0) && flag == true && collid == false) {
 			GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
-			gridObj.GetComponent<GridSelection> ().setClicked (false);
 			clicked = false;
 			Cursor.visible = true;
 			flag = false;
@@ -35,7 +34,6 @@ public class MoveObjectEven : MonoBehaviour {
 				clicked = true;
 				GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
 
-				gridObj.GetComponent<GridSelection> ().setClicked (true);
 
 
 			}
@@ -43,7 +41,21 @@ public class MoveObjectEven : MonoBehaviour {
 
 		if (clicked == true) {
 
+			if (transform.position.x > 7f) {
+				collid = true;
+			} else if (transform.position.x < -7f) {
+				collid = true;
+			} else if (transform.position.y > 4f) {
+				collid = true;
+			} else if (transform.position.y < -4f) {
+				collid = true;
+			} else {
+				collid = false;
+			}
+
 			hoverOver = false;
+
+			gridObj.GetComponent<GridSelection> ().setClicked (true);
 
 			GetComponent<Renderer> ().sortingOrder = 1000;
 
@@ -78,8 +90,14 @@ public class MoveObjectEven : MonoBehaviour {
 
 		}
 
+		gridObj.GetComponent<GridSelection> ().setClicked (false);
+
+
 
 		flag = true;
+
+
+
 
 
 	}
