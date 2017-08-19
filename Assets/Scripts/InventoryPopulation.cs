@@ -27,7 +27,7 @@ public class InventoryPopulation : MonoBehaviour {
 		GameObject cam = GameObject.Find ("Main Camera");
 		cam.GetComponent<Camera> ().orthographicSize = 10;
 		gameTime = GameObject.Find ("GameTimePanel");
-		PlayerPrefs.SetString ("Inventory", "101;102;101;101");
+		PlayerPrefs.SetString ("Inventory", "101;102;101;101;110");
 		gameTime.SetActive (false);
 		ReadInv ();
 		StartCoroutine("UpdateInv");

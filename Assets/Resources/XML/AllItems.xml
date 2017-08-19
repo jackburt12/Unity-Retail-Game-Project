@@ -74,7 +74,7 @@
 	</Item>
 	<Item>
 		<ItemID>110</ItemID>
-		<ImageName></ImageName>
+		<ImageName>bakery</ImageName>
 		<ItemName>Bakery</ItemName>
 		<ItemType>FUNCTIONAL</ItemType>
 		<ItemCost>1200</ItemCost>
