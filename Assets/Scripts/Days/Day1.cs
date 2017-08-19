@@ -7,17 +7,21 @@ public class Day1 : MonoBehaviour {
 
 	private GameObject floor;
 	private GameObject wall;
+	private GameObject desk;
 
 	private bool continuePressed = false;
 	private List<Sprite> floorList = new List<Sprite>();
 	private List<Sprite> wallList = new List<Sprite>();
+	private List<Sprite> deskList = new List<Sprite>();
 	private int currentPosition = 0;
 	private GameObject welcomePanel;
 	private bool welcomeClicked = false;
 	private GameObject floorButtons;
 	private GameObject wallButtons;
+	private GameObject deskButtons;
 	private bool floorClicked;
 	private bool wallClicked;
+	private bool deskClicked;
 
 	private float typeSpeed = 0.01f;
 
@@ -26,6 +30,8 @@ public class Day1 : MonoBehaviour {
 	AudioSource audio;
 
 	public void StartDay () {
+
+		PlayerPrefs.SetInt ("Money", 10000);
 
 		floor = GameObject.Find ("PlayArea");
 
@@ -40,6 +46,14 @@ public class Day1 : MonoBehaviour {
 		wallList.Add(Resources.Load<Sprite>("Walls/YellowPlain"));
 		wallList.Add (Resources.Load<Sprite> ("Walls/WhitePlain"));
 		wallList.Add (Resources.Load<Sprite> ("Walls/BrickWall"));
+
+		desk = (GameObject)GameObject.Instantiate (Resources.Load ("Prefabs/Items/Desk"));
+		desk.SetActive (false);
+
+		deskList.Add(Resources.Load<Sprite>("Desks/Desk1"));
+		deskList.Add(Resources.Load<Sprite>("Desks/Desk2"));
+		deskList.Add(Resources.Load<Sprite>("Desks/Desk3"));
+		deskList.Add(Resources.Load<Sprite>("Desks/Desk4"));
 
 		StartCoroutine ("Sequence");
 
@@ -60,7 +74,8 @@ public class Day1 : MonoBehaviour {
 		yield return StartCoroutine ("WelcomePanel");
 		yield return StartCoroutine ("ChooseFloor");
 		yield return StartCoroutine ("ChooseWall");
-
+		yield return StartCoroutine ("ChooseDesk");
+		yield return StartCoroutine ("OpenInventory");
 	}
 
 	public void FloorChangerRight() {
@@ -106,6 +121,29 @@ public class Day1 : MonoBehaviour {
 			currentPosition--;
 		}
 		wall.GetComponent<SpriteRenderer> ().sprite = wallList [currentPosition];
+
+	}
+
+	public void DeskChangerRight() {
+
+		if (currentPosition == deskList.Count - 1) {
+			currentPosition = 0;
+		} else {
+			currentPosition++;
+		}
+
+		desk.GetComponent<SpriteRenderer> ().sprite = deskList [currentPosition];
+
+	}
+
+	public void DeskChangerLeft() {
+
+		if (currentPosition == 0) {
+			currentPosition = (deskList.Count - 1);
+		} else {
+			currentPosition--;
+		}
+		desk.GetComponent<SpriteRenderer> ().sprite = deskList [currentPosition];
 
 	}
 
@@ -156,7 +194,7 @@ public class Day1 : MonoBehaviour {
 	}
 
 	public void CloseWelcomePanel() {
-
+		GameObject moneyPanel = (GameObject)GameObject.Instantiate (Resources.Load ("Prefabs/UI/MoneyPanel"), GameObject.Find("Canvas").transform);
 		GameObject.Destroy (welcomePanel);
 		welcomeClicked = true;
 
@@ -182,12 +220,25 @@ public class Day1 : MonoBehaviour {
 		GameObject.Destroy (floorButtons);
 		floorClicked = true;
 
+		PlayerPrefs.SetInt ("Money", PlayerPrefs.GetInt ("Money") - 1500);
+
 	}
 
 	public void CloseWall() {
 		audio.PlayOneShot (chaching);
 		GameObject.Destroy (wallButtons);
 		wallClicked = true;
+		PlayerPrefs.SetInt ("Money", PlayerPrefs.GetInt ("Money") - 750);
+
+
+	}
+
+	public void CloseDesk() {
+		audio.PlayOneShot (chaching);
+		GameObject.Destroy (deskButtons);
+		deskClicked = true;
+		PlayerPrefs.SetInt ("Money", PlayerPrefs.GetInt ("Money") - 200);
+
 
 	}
 
@@ -220,5 +271,32 @@ public class Day1 : MonoBehaviour {
 
 		yield return null;
 
+	}
+
+	IEnumerator ChooseDesk() {
+		desk.SetActive (true);
+		deskButtons = (GameObject)Instantiate(Resources.Load("Prefabs/UI/FloorChangeButtons"), GameObject.Find("Canvas").transform);
+
+		deskButtons.transform.Find ("ConfirmButton").GetComponentInChildren<Text> ().text = "£200";
+		deskButtons.transform.Find ("ChooseFloorText").GetComponent<Text> ().text = "Choose Desk";
+
+		deskButtons.transform.Find("ConfirmButton").GetComponent<Button>().onClick.AddListener (CloseDesk);
+		deskButtons.transform.Find("ChangerButtonLeft").GetComponent<Button>().onClick.AddListener (DeskChangerLeft);
+		deskButtons.transform.Find ("ChangerButtonRight").GetComponent<Button> ().onClick.AddListener (DeskChangerRight);
+
+		while (!deskClicked) {
+
+			yield return null;
+		}
+
+		yield return null;
+
+	}
+
+	IEnumerator OpenInventory() {
+
+		GameObject inventory = (GameObject)Instantiate(Resources.Load("Prefabs/UI/InventoryMoney"), GameObject.Find("Canvas").transform);
+
+		yield return null;
 	}
 }

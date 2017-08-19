@@ -17,6 +17,8 @@ public class InventoryPopulation : MonoBehaviour {
 
 	private GameObject inventoryPanel;
 
+	private GameObject gameTime;
+
 	private bool instantiated = false;
 
 	// Use this for initialization
@@ -24,9 +26,9 @@ public class InventoryPopulation : MonoBehaviour {
 
 		GameObject cam = GameObject.Find ("Main Camera");
 		cam.GetComponent<Camera> ().orthographicSize = 10;
-
+		gameTime = GameObject.Find ("GameTimePanel");
 		PlayerPrefs.SetString ("Inventory", "101;102;101;101");
-
+		gameTime.SetActive (false);
 		ReadInv ();
 		StartCoroutine("UpdateInv");
 
@@ -109,6 +111,7 @@ public class InventoryPopulation : MonoBehaviour {
 			}
 			if (exists == false) {
 				currentItem = (GameObject)Instantiate (Resources.Load ("Prefabs/UI/ItemBox"), inventoryPanel.transform);
+
 
 				currentItem.GetComponentInChildren<Text> ().text = item.Name;
 				currentItem.transform.GetChild(2).GetComponent<Text> ().text = "x1";
