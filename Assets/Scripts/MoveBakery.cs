@@ -9,7 +9,8 @@ public class MoveBakery : MonoBehaviour {
 	private Animator anim;
 	private bool flag = false;
 	private GameObject gridObj;
-	private bool collid = false;
+	public bool collid = false;
+	private bool objectCollid = false;
 	private bool topLeft, topRight, bottomLeft, bottomRight = false;
 
 	// Use this for initialization
@@ -24,9 +25,10 @@ public class MoveBakery : MonoBehaviour {
 
 		GetComponent<Renderer> ().sortingOrder = (int)(transform.position.y * -10);
 
-		if (clicked == true && Input.GetKeyDown (KeyCode.Mouse0) && flag == true && collid == false) {
+		if (clicked == true && Input.GetKeyDown (KeyCode.Mouse0) && flag == true && collid == false && objectCollid == false) {
 			GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
 			clicked = false;
+
 			Cursor.visible = true;
 			flag = false;
 		}
@@ -36,13 +38,17 @@ public class MoveBakery : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.Mouse0) && clicked != true && flag == true) {
 				clicked = true;
 				GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
-
-
-
 			}
 		}
 
 		if (clicked == true) {
+
+			if (collid == true || objectCollid == true) {
+				GetComponent<SpriteRenderer> ().color = new Color (1, 0.5f, 0.5f, 0.5f);
+			} else {
+				GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
+			}
+
 
 			if (transform.position.x > 7f) {
 				collid = true;
@@ -54,6 +60,7 @@ public class MoveBakery : MonoBehaviour {
 				collid = true;
 			} else {
 				collid = false;
+				print ("goodbye");
 			}
 
 			hoverOver = false;
@@ -67,10 +74,10 @@ public class MoveBakery : MonoBehaviour {
 			x = Input.mousePosition.x;
 			y = Input.mousePosition.y;
 
-			Vector3 currentPos = Camera.main.ScreenToWorldPoint (new Vector3 (x ,y , 10.0f));
+			Vector3 currentPos = Camera.main.ScreenToWorldPoint (new Vector3 (x, y, 10.0f));
 
-		//	currentPos.x = (Mathf.RoundToInt(currentPos.x));
-		//	currentPos.y = Mathf.RoundToInt(currentPos.y);
+			//	currentPos.x = (Mathf.RoundToInt(currentPos.x));
+			//	currentPos.y = Mathf.RoundToInt(currentPos.y);
 
 			if (currentPos.x >= 0) {
 				//right
@@ -97,18 +104,12 @@ public class MoveBakery : MonoBehaviour {
 			}
 
 			Cursor.visible = false;
-
-			if (collid == true) {
-				GetComponent<SpriteRenderer> ().color = new Color (1, 0.5f, 0.5f, 0.5f);
-			} else {
-				GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
-			}
-
-
+		
+		} else {
+			gridObj.GetComponent<GridSelection> ().setClicked (false);
 
 		}
 
-		gridObj.GetComponent<GridSelection> ().setClicked (false);
 
 		flag = true;
 
@@ -116,9 +117,6 @@ public class MoveBakery : MonoBehaviour {
 
 	public void OnMouseOver () {
 		hoverOver = true;
-
-
-
 	}
 
 	public void OnMouseExit() {
@@ -132,11 +130,11 @@ public class MoveBakery : MonoBehaviour {
 	}
 
 	public void OnCollisionStay2D (Collision2D col) {
-		collid = true;
+		objectCollid = true;
 	}
 
 	public void OnCollisionExit2D (Collision2D col) {
-		collid = false;
+		objectCollid = false;
 	}
 
 	IEnumerator TopLeft() {
@@ -152,7 +150,7 @@ public class MoveBakery : MonoBehaviour {
 		anim.SetBool ("BackLeft", true);
 
 
-		while (true) {
+		while (clicked == true) {
 			if (Input.GetKeyDown (KeyCode.Mouse1)) {
 				if (anim.GetBool ("BackLeft") == true) {
 					transform.position = new Vector3 (-7f, 2f);
@@ -188,7 +186,7 @@ public class MoveBakery : MonoBehaviour {
 		anim.SetBool ("BackRight", true);
 
 		transform.position = new Vector3 (5f, 4f);
-		while (true) {
+		while (clicked == true) {
 			if (Input.GetKeyDown (KeyCode.Mouse1)) {
 				if (anim.GetBool ("BackRight") == true) {
 					transform.position = new Vector3 (7f, 2f);
@@ -223,7 +221,7 @@ public class MoveBakery : MonoBehaviour {
 		anim.SetBool ("FrontLeft", true);
 		transform.position = new Vector3 (-5f, -3f);
 
-		while (true) {
+		while (clicked == true) {
 			if (Input.GetKeyDown (KeyCode.Mouse1)) {
 				transform.position = new Vector3 (-7f, -1.5f);
 
@@ -259,7 +257,7 @@ public class MoveBakery : MonoBehaviour {
 		anim.SetBool ("FrontRight", true);
 
 		transform.position = new Vector3 (5f, -3f);
-		while (true) {
+		while (clicked == true) {
 			if (Input.GetKeyDown (KeyCode.Mouse1)) {
 				transform.position = new Vector3 (7f, -1.5f);
 

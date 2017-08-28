@@ -243,13 +243,27 @@ public class Day1 : MonoBehaviour {
 	}
 
 	IEnumerator ChooseWall() {
+		GameObject camera = GameObject.Find ("Main Camera");
+		float lerpTime = 1;
+		float currentLerpTime = 0;
 
-		Vector3 camPos = GameObject.Find ("Main Camera").transform.position;
+		Vector3 camPos = camera.transform.position;
 
-		while (GameObject.Find ("Main Camera").transform.position.y < 5) {
-			GameObject.Find ("Main Camera").transform.Translate(Vector2.up * 0.02f);
+		while (camera.transform.position.y < 5) {
+
+			/*
+			currentLerpTime += Time.deltaTime;
+			if (currentLerpTime >= lerpTime) {
+				currentLerpTime = lerpTime;
+			}
+			float perc = currentLerpTime / lerpTime;
+			GameObject.Find ("Main Camera").transform.position = Vector3.Lerp(transform.position, new Vector3(0,5f,-2.5f), perc);
+			yield return null;
+			*/
+			camera.transform.position = new Vector3(0,camera.transform.position.y + Time.deltaTime * 10f, camera.transform.position.z);
+			yield return null;
 		}
-
+			
 		wallButtons = (GameObject)Instantiate(Resources.Load("Prefabs/UI/FloorChangeButtons"), GameObject.Find("Canvas").transform);
 
 		wallButtons.transform.Find ("ConfirmButton").GetComponentInChildren<Text> ().text = "£750";
@@ -263,15 +277,15 @@ public class Day1 : MonoBehaviour {
 
 			yield return null;
 		}
-
-		while (GameObject.Find ("Main Camera").transform.position.y > camPos.y) {
-			GameObject.Find ("Main Camera").transform.Translate(Vector2.down * 0.02f);
-		}
-
-
-		yield return null;
+		currentLerpTime = 0;
+		while (camera.transform.position.y > 0) {
+			
+			camera.transform.position = new Vector3 (0, camera.transform.position.y - Time.deltaTime * 10f, camera.transform.position.z);
+			yield return null;
+ 		}
 
 	}
+
 
 	IEnumerator ChooseDesk() {
 		desk.SetActive (true);

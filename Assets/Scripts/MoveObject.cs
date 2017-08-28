@@ -24,7 +24,6 @@ public class MoveObject : MonoBehaviour {
 
 		if (clicked == true && Input.GetKeyDown (KeyCode.Mouse0) && flag == true && collid == false) {
 			GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
-			gridObj.GetComponent<GridSelection> ().setClicked (false);
 			clicked = false;
 			Cursor.visible = true;
 			flag = false;
@@ -36,13 +35,12 @@ public class MoveObject : MonoBehaviour {
 				clicked = true;
 				GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
 
-				gridObj.GetComponent<GridSelection> ().setClicked (true);
-
-
 			}
 		}
 
 		if (clicked == true) {
+
+
 			if (transform.position.x > 7.5f) {
 				collid = true;
 			} else if (transform.position.x < -7.5f) {
@@ -56,10 +54,12 @@ public class MoveObject : MonoBehaviour {
 			}
 			hoverOver = false;
 
+			gridObj.GetComponent<GridSelection> ().setClicked (true);
+
 			GetComponent<Renderer> ().sortingOrder = 1000;
 
 			if (Input.GetKeyDown (KeyCode.Mouse1)) {
-			 	anim.SetBool ("Click", true);
+				anim.SetBool ("Click", true);
 			}
 			if (Input.GetKeyUp (KeyCode.Mouse1)) {
 				anim.SetBool ("Click", false);
@@ -70,10 +70,10 @@ public class MoveObject : MonoBehaviour {
 			x = Input.mousePosition.x;
 			y = Input.mousePosition.y;
 
-			Vector3 currentPos = Camera.main.ScreenToWorldPoint (new Vector3 (x ,y , 10.0f));
+			Vector3 currentPos = Camera.main.ScreenToWorldPoint (new Vector3 (x, y, 10.0f));
 
-			currentPos.x = (Mathf.RoundToInt(currentPos.x) - 0.5f);
-			currentPos.y = Mathf.RoundToInt(currentPos.y);
+			currentPos.x = (Mathf.RoundToInt (currentPos.x) - 0.5f);
+			currentPos.y = Mathf.RoundToInt (currentPos.y);
 
 			Cursor.visible = false;
 
@@ -86,6 +86,9 @@ public class MoveObject : MonoBehaviour {
 			}
 
 
+
+		} else {
+			gridObj.GetComponent<GridSelection> ().setClicked (false);
 
 		}
 

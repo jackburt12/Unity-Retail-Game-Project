@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Prologue : MonoBehaviour {
 
-	private float speed = 0.04f;
+	private float speed = 0.03f;
 
 //	private bool active = false;
 	GameTime gameTime;

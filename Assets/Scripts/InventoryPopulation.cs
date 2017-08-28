@@ -177,8 +177,10 @@ public class InventoryPopulation : MonoBehaviour {
 			GameObject instantiatedItem = (GameObject)Instantiate (Resources.Load<GameObject> ("Prefabs/Items/" + item.Image));
 			if (instantiatedItem.GetComponent<MoveObject> () != null) {
 				instantiatedItem.GetComponent<MoveObject> ().clicked = true;
-			} else {
+			} else if (instantiatedItem.GetComponent<MoveObjectEven>()!= null) {
 				instantiatedItem.GetComponent<MoveObjectEven> ().clicked = true;
+			} else {
+				instantiatedItem.GetComponent<MoveBakery>().clicked = true;
 			}
 			
 			GameObject cancel = (GameObject)Instantiate (Resources.Load ("Prefabs/UI/InvInstantiatecancel"), GameObject.Find ("InvMask").transform);
@@ -205,16 +207,24 @@ public class InventoryPopulation : MonoBehaviour {
 			}
 			instantiated = false;
 			RemoveItemFromInv (item);
-			GameObject.Destroy(GameObject.Find ("InvInstantiateCancel(Clone)"));
-		} else {
+			GameObject.Destroy (GameObject.Find ("InvInstantiateCancel(Clone)"));
+		} else if (instantiatedItem.GetComponent<MoveObjectEven> () != null) {
 			while (instantiatedItem.GetComponent<MoveObjectEven> ().clicked == true) {
 				yield return null;
 			}
 
 			instantiated = false;
 			RemoveItemFromInv (item);
-			GameObject.Destroy(GameObject.Find ("InvInstantiateCancel(Clone)"));
+			GameObject.Destroy (GameObject.Find ("InvInstantiateCancel(Clone)"));
 
+		} else {
+			while (instantiatedItem.GetComponent<MoveBakery> ().clicked == true) {
+				yield return null;
+			}
+
+			instantiated = false;
+			RemoveItemFromInv (item);
+			GameObject.Destroy (GameObject.Find ("InvInstantiateCancel(Clone)"));
 		}
 
 
@@ -223,8 +233,10 @@ public class InventoryPopulation : MonoBehaviour {
 	public void CancelInstantiate(GameObject toDestroy, GameObject button) {
 		if (toDestroy.GetComponent<MoveObject> () != null) {
 			toDestroy.GetComponent<MoveObject> ().clicked = false;
-		} else {
+		} else if (toDestroy.GetComponent<MoveObjectEven> () != null) {
 			toDestroy.GetComponent<MoveObjectEven> ().clicked = false;
+		} else {
+			toDestroy.GetComponent<MoveBakery> ().clicked = false;
 		}
 		GameObject.Destroy (toDestroy);
 		GameObject.Destroy (button);

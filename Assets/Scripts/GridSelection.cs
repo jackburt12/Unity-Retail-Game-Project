@@ -14,10 +14,6 @@ public class GridSelection : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-		if (clicked) {
-			//GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 0.5f);
-		}
 
 		if (clicked) {
 

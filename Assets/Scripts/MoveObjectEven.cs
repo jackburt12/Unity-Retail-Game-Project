@@ -23,6 +23,8 @@ public class MoveObjectEven : MonoBehaviour {
 
 		if (clicked == true && Input.GetKeyDown (KeyCode.Mouse0) && flag == true && collid == false) {
 			GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+			gridObj.GetComponent<GridSelection> ().setClicked (false);
+
 			clicked = false;
 			Cursor.visible = true;
 			flag = false;
@@ -71,10 +73,10 @@ public class MoveObjectEven : MonoBehaviour {
 			x = Input.mousePosition.x;
 			y = Input.mousePosition.y;
 
-			Vector3 currentPos = Camera.main.ScreenToWorldPoint (new Vector3 (x ,y , 10.0f));
+			Vector3 currentPos = Camera.main.ScreenToWorldPoint (new Vector3 (x, y, 10.0f));
 
-			currentPos.x = (Mathf.RoundToInt(currentPos.x));
-			currentPos.y = Mathf.RoundToInt(currentPos.y);
+			currentPos.x = (Mathf.RoundToInt (currentPos.x));
+			currentPos.y = Mathf.RoundToInt (currentPos.y);
 
 			Cursor.visible = false;
 
@@ -88,18 +90,12 @@ public class MoveObjectEven : MonoBehaviour {
 
 
 
+		} else {
+			gridObj.GetComponent<GridSelection> ().setClicked (false);
+
 		}
 
-		gridObj.GetComponent<GridSelection> ().setClicked (false);
-
-
-
 		flag = true;
-
-
-
-
-
 	}
 
 	public void OnMouseOver () {
