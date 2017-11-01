@@ -20,11 +20,9 @@ public class Trousers : MonoBehaviour {
 
 		Sprite[] trousers1 = Resources.LoadAll<Sprite> ("Clothes/TrousersIdle");
 		Sprite[] trousers2 = Resources.LoadAll<Sprite> ("Clothes/ShortsIdle");
-	//	Sprite[] trousers3 = Resources.LoadAll<Sprite> ("Clothes/DressShirtIdle");
 
 		trousersList.Add(trousers1[0]);
 		trousersList.Add (trousers2 [0]);
-	//	trousersList.Add (trousers3 [0]);
 
 
 	}
